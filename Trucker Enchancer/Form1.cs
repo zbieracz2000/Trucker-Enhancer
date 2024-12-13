@@ -5,7 +5,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -50,7 +49,7 @@ namespace Trucker_Enchancer
             {
                 DialogResult result = fbd.ShowDialog();
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath))
                 {
                     path = fbd.SelectedPath;
                     if (System.IO.File.Exists(path + "\\trucker.exe") == true)
