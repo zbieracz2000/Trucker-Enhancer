@@ -17,6 +17,12 @@ namespace Trucker_Enchancer
 
     public partial class Form1 : Form
     {
+        int numberofprofiles;
+        string[] profiles;
+        int selectedprofile;
+        byte[,] profilevars = new byte[30,30];
+        int[] kasaprofilu = new int[30];
+        string[,] profile = new string[30,3];
         string path;
         bool no_intro;
         bool better_distance;
@@ -33,18 +39,19 @@ namespace Trucker_Enchancer
             
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void listaprofili_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            nazwaprofilutextbox.Text = profile[((uint)listaprofili.SelectedIndex), 1];
+            profilkasa.Value = kasaprofilu[((uint)listaprofili.SelectedIndex)];
+            selectedprofile = ((int)listaprofili.SelectedIndex);
+            if (profilevars[selectedprofile, 1] == 0x00) radioButton1.PerformClick();
+            if (profilevars[selectedprofile, 1] == 0x01) radioButton2.PerformClick();
+            if (profilevars[selectedprofile, 1] == 0x02) radioButton3.PerformClick();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            listaprofili.Items.Clear();
             using (var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();
@@ -55,6 +62,35 @@ namespace Trucker_Enchancer
                     if (System.IO.File.Exists(path + "\\trucker.exe") == true)
                     {
                         label1.Text = path;
+                        string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
+                        numberofprofiles = files.Length;
+                        Console.WriteLine("The number of profiles is {0}.", numberofprofiles);
+                        profiles = files;
+                        int index;
+                        index = 0;
+                        foreach (string file in files)
+                        {
+                            FileInfo f = new FileInfo(file);
+                            profile[index, 0] = f.Name;
+                            using (var stream = new FileStream(path + "\\save\\" + f.Name, FileMode.Open, FileAccess.Read))
+                            {
+                                string name = "";
+                                byte[] buffer = new byte[28];
+                                stream.Position = 5;
+                                stream.Read(buffer, 0, 20);
+                                name = System.Text.Encoding.UTF8.GetString(buffer, 0, 20);
+                                profile[index, 1] = name;
+                                stream.Position = 232;
+                                stream.Read(buffer, 0, 4);
+                                kasaprofilu[index] = BitConverter.ToInt32(buffer, 0);
+                                stream.Position = 236;
+                                stream.Read(buffer, 0, 1);
+                                profilevars[index, 1] = buffer[0];
+                            }
+                            listaprofili.Items.Insert(index, profile[index, 1]);
+                            index++;
+                            Console.WriteLine(files);
+                        }
                     }
                     else
                     {
@@ -339,5 +375,36 @@ namespace Trucker_Enchancer
         {
             headlight_disabled = checkBox4.Checked;
         }
+
+        private void saveprofile_Click(object sender, EventArgs e)
+        {
+            using (var stream = new FileStream(path + "\\save\\" + profile[selectedprofile, 0], FileMode.Open, FileAccess.ReadWrite))
+            {
+                byte[] bytes = Encoding.ASCII.GetBytes(nazwaprofilutextbox.Text);
+                stream.Position = 5;
+                stream.Write(bytes, 0, bytes.Length);
+                Int32 kasa = (int)profilkasa.Value;
+                bytes = BitConverter.GetBytes(kasa);
+                stream.Position = 232;
+                stream.Write(bytes, 0, 4);
+                stream.Position = 236;
+                stream.WriteByte(profilevars[selectedprofile, 1]);
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            profilevars[selectedprofile, 1] = 0x00;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            profilevars[selectedprofile, 1] = 0x01;
+        }
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            profilevars[selectedprofile, 1] = 0x02;
+        }
+
     }
 }
