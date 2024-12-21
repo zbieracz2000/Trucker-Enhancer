@@ -6,3 +6,5 @@ Obecnie pozwala na:
 - Zmianę kwoty pieniędzy jaką otrzymujemy na początku gry
 - Wyłączenie białego spritea, "strugi" przednich świateł
 - Podniesienie dystansu rysowania na ustawieniu "jakość"
+- Edycję nazw graczy, ich stanu konta oraz poziomu trudności
+- Odblokowanie wszystkich tras dla danego gracza
