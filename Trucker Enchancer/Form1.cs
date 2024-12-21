@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -28,6 +29,7 @@ namespace Trucker_Enchancer
         bool better_distance;
         bool custom_music;
         bool headlight_disabled;
+        bool unlock_races;
         public Form1()
         {
             InitializeComponent();
@@ -35,8 +37,14 @@ namespace Trucker_Enchancer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            
+            Process[] pname = Process.GetProcessesByName("trucker");
+            if (pname.Length != 0)
+            {
+                System.Media.SystemSounds.Hand.Play();
+                MessageBox.Show("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!", "Trucker Enchancer");
+                System.Console.WriteLine("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!");
+                Application.Exit();
+            }
         }
 
         private void listaprofili_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,6 +55,12 @@ namespace Trucker_Enchancer
             if (profilevars[selectedprofile, 1] == 0x00) radioButton1.PerformClick();
             if (profilevars[selectedprofile, 1] == 0x01) radioButton2.PerformClick();
             if (profilevars[selectedprofile, 1] == 0x02) radioButton3.PerformClick();
+            if (profilevars[selectedprofile, 2] == 0x00) checkBox5.Enabled = true;
+            else
+            {
+                checkBox5.Enabled = false;
+                checkBox5.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +78,7 @@ namespace Trucker_Enchancer
                         label1.Text = path;
                         string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
                         numberofprofiles = files.Length;
-                        Console.WriteLine("The number of profiles is {0}.", numberofprofiles);
+                        Console.WriteLine("{0} profili.", numberofprofiles);
                         profiles = files;
                         int index;
                         index = 0;
@@ -86,6 +100,9 @@ namespace Trucker_Enchancer
                                 stream.Position = 236;
                                 stream.Read(buffer, 0, 1);
                                 profilevars[index, 1] = buffer[0];
+                                stream.Position = 128;
+                                stream.Read(buffer, 0, 1);
+                                profilevars[index, 2] = buffer[0];
                             }
                             listaprofili.Items.Insert(index, profile[index, 1]);
                             index++;
@@ -94,7 +111,9 @@ namespace Trucker_Enchancer
                     }
                     else
                     {
+                        System.Media.SystemSounds.Hand.Play();
                         System.Windows.Forms.MessageBox.Show("Nie znaleziono gry w tym folderze!", "Trucker Enchancer");
+                        System.Console.WriteLine("Zły folder");
                         path = null;
                     }
                 }
@@ -105,7 +124,9 @@ namespace Trucker_Enchancer
         {
             if (path == null)
             {
+                System.Media.SystemSounds.Hand.Play();
                 System.Windows.Forms.MessageBox.Show("Ustaw ścieżkę do folderu z grą!", "Trucker Enchancer");
+                System.Console.WriteLine("Nie ustawiono ścieżki");
             }
             else 
             {
@@ -343,6 +364,7 @@ namespace Trucker_Enchancer
                     stream.Position = 508447;
                     stream.WriteByte(bytes[3]);
                 }
+                System.Media.SystemSounds.Asterisk.Play();
                 System.Windows.Forms.MessageBox.Show("Spatchowano!", "Trucker Enchancer");
             }
         }
@@ -378,7 +400,7 @@ namespace Trucker_Enchancer
 
         private void saveprofile_Click(object sender, EventArgs e)
         {
-            using (var stream = new FileStream(path + "\\save\\" + profile[selectedprofile, 0], FileMode.Open, FileAccess.ReadWrite))
+            if (path != null) using (var stream = new FileStream(path + "\\save\\" + profile[selectedprofile, 0], FileMode.Open, FileAccess.ReadWrite))
             {
                 byte[] bytes = Encoding.ASCII.GetBytes(nazwaprofilutextbox.Text);
                 stream.Position = 5;
@@ -389,6 +411,20 @@ namespace Trucker_Enchancer
                 stream.Write(bytes, 0, 4);
                 stream.Position = 236;
                 stream.WriteByte(profilevars[selectedprofile, 1]);
+                if(unlock_races == true)
+                {
+                    stream.Position = 40;
+                    while (stream.Position <= 128)
+                    {
+                        stream.WriteByte(0x03);
+                        stream.Position++;
+                        stream.Position++;
+                        stream.Position++;
+                    }
+                }
+                System.Media.SystemSounds.Asterisk.Play();
+                System.Console.WriteLine("Zapisano");
+                System.Windows.Forms.MessageBox.Show("Zapisano!", "Trucker Enchancer");
             }
         }
 
@@ -406,5 +442,9 @@ namespace Trucker_Enchancer
             profilevars[selectedprofile, 1] = 0x02;
         }
 
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            unlock_races = checkBox5.Checked;
+        }
     }
 }
