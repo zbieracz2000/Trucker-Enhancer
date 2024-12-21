@@ -4326,6 +4326,9 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="saveprofile.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="saveprofile.Location" type="System.Drawing.Point, System.Drawing">
     <value>320, 268</value>
   </data>

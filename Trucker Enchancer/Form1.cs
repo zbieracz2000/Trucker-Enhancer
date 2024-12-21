@@ -61,6 +61,7 @@ namespace Trucker_Enchancer
                 checkBox5.Enabled = false;
                 checkBox5.Checked = false;
             }
+            if (listaprofili.Items.Count != 0) saveprofile.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
