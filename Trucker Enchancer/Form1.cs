@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -30,6 +31,7 @@ namespace Trucker_Enchancer
         bool custom_music;
         bool headlight_disabled;
         bool unlock_races;
+        bool trucker2;
         public Form1()
         {
             InitializeComponent();
@@ -74,8 +76,10 @@ namespace Trucker_Enchancer
                 if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath))
                 {
                     path = fbd.SelectedPath;
-                    if (System.IO.File.Exists(path + "\\trucker.exe") == true)
+                    if (System.IO.File.Exists(path + "\\trucker.exe") == true) //detekcja truckera 1
                     {
+                        Console.WriteLine("Wykryto Trukcera 1");
+                        trucker2 = false;
                         label1.Text = path;
                         string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
                         numberofprofiles = files.Length;
@@ -83,6 +87,11 @@ namespace Trucker_Enchancer
                         profiles = files;
                         int index;
                         index = 0;
+                        money.Enabled = true;
+                        checkBox2.Enabled = true;
+                        checkBox3.Enabled = true;
+                        checkBox4.Enabled = true;
+                        checkBox5.Enabled = true;
                         foreach (string file in files)
                         {
                             FileInfo f = new FileInfo(file);
@@ -104,6 +113,48 @@ namespace Trucker_Enchancer
                                 stream.Position = 128;
                                 stream.Read(buffer, 0, 1);
                                 profilevars[index, 2] = buffer[0];
+                            }
+                            listaprofili.Items.Insert(index, profile[index, 1]);
+                            index++;
+                            Console.WriteLine(files);
+                        }
+                    }
+                    else if (System.IO.File.Exists(path + "\\trucker2.exe") == true) //detekcja truckera 2, dwójka jest kompletnie niegrywalna, ale jak już mi się nudzi to dodam
+                    {
+                        Console.WriteLine("Wykryto Trukcera 2");
+                        trucker2 = true;
+                        label1.Text = path;
+                        string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
+                        numberofprofiles = files.Length;
+                        Console.WriteLine("{0} profili.", numberofprofiles);
+                        profiles = files;
+                        int index;
+                        index = 0;
+                        System.Media.SystemSounds.Asterisk.Play();
+                        System.Windows.Forms.MessageBox.Show("Wykryty Trucker 2, liczba opcji ograniczona!", "Trucker Enchancer");
+                        money.Enabled = false;
+                        checkBox2.Enabled = false;
+                        checkBox3.Enabled = false;
+                        checkBox4.Enabled = false;
+                        checkBox5.Enabled = false;
+                        foreach (string file in files)
+                        {
+                            FileInfo f = new FileInfo(file);
+                            profile[index, 0] = f.Name;
+                            using (var stream = new FileStream(path + "\\save\\" + f.Name, FileMode.Open, FileAccess.Read))
+                            {
+                                string name = "";
+                                byte[] buffer = new byte[28];
+                                stream.Position = 5;
+                                stream.Read(buffer, 0, 20);
+                                name = System.Text.Encoding.UTF8.GetString(buffer, 0, 20);
+                                profile[index, 1] = name;
+                                stream.Position = 640;
+                                stream.Read(buffer, 0, 4);
+                                kasaprofilu[index] = BitConverter.ToInt32(buffer, 0);
+                                stream.Position = 644;
+                                stream.Read(buffer, 0, 1);
+                                profilevars[index, 1] = buffer[0];
                             }
                             listaprofili.Items.Insert(index, profile[index, 1]);
                             index++;
@@ -136,7 +187,7 @@ namespace Trucker_Enchancer
 
                 if (no_intro == true)
                 {
-                    using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                    if (trucker2 == false) using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
                     {
                         stream.Position = 1303556;
                         stream.WriteByte(0x0C);
@@ -157,10 +208,15 @@ namespace Trucker_Enchancer
                         stream.Position = 1303582;
                         stream.WriteByte(0x09);
                     }
+                    if (trucker2 == true) using (var stream = new FileStream(path + "\\trucker2.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 920296;
+                            stream.WriteByte(0x00);
+                        }
                 }
                 else
                 {
-                    using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                    if (trucker2 == false) using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
                     {
                         stream.Position = 1303556;
                         stream.WriteByte(0x6C);
@@ -181,189 +237,197 @@ namespace Trucker_Enchancer
                         stream.Position = 1303582;
                         stream.WriteByte(0x69);
                     }
+                    if (trucker2 == true) using (var stream = new FileStream(path + "\\trucker2.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 920296;
+                            stream.WriteByte(0x69);
+                        }
                 }
-                if (custom_music == true)
-                {
+                if (trucker2 == false)
+                {    
+                    if (custom_music == true)
+                    {
+                        using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 1334578;
+                            stream.WriteByte(0x63);
+                            stream.Position = 1334579;
+                            stream.WriteByte(0x75);
+                            stream.Position = 1334580;
+                            stream.WriteByte(0x73);
+                            stream.Position = 1334581;
+                            stream.WriteByte(0x74);
+                            stream.Position = 1334582;
+                            stream.WriteByte(0x6F);
+                            stream.Position = 1334583;
+                            stream.WriteByte(0x6D);
+                            stream.Position = 1334584;
+                            stream.WriteByte(0x00);
+                            stream.Position = 1334585;
+                            stream.WriteByte(0x00);
+                            stream.Position = 1334586;
+                            stream.WriteByte(0x00);
+                            stream.Position = 1334587;
+                            stream.WriteByte(0x00);
+                        }
+                    }
+                    else
+                    {
+                        using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 1334578;
+                            stream.WriteByte(0x68);
+                            stream.Position = 1334579;
+                            stream.WriteByte(0x79);
+                            stream.Position = 1334580;
+                            stream.WriteByte(0x70);
+                            stream.Position = 1334581;
+                            stream.WriteByte(0x65);
+                            stream.Position = 1334582;
+                            stream.WriteByte(0x72);
+                            stream.Position = 1334583;
+                            stream.WriteByte(0x61);
+                            stream.Position = 1334584;
+                            stream.WriteByte(0x76);
+                            stream.Position = 1334585;
+                            stream.WriteByte(0x65);
+                            stream.Position = 1334586;
+                            stream.WriteByte(0x72);
+                            stream.Position = 1334587;
+                            stream.WriteByte(0x73);
+                        }
+                    }
+                    if (better_distance == true)
+                    {
+                        using (var stream = new FileStream(path + "\\cfg\\L_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x33);
+                            stream.Position = 19;
+                            stream.WriteByte(0x33);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x33);
+                            stream.Position = 19;
+                            stream.WriteByte(0x33);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L_normalny_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x33);
+                            stream.Position = 19;
+                            stream.WriteByte(0x33);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L1full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x33);
+                            stream.Position = 19;
+                            stream.WriteByte(0x33);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_dzien_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x34);
+                            stream.Position = 19;
+                            stream.WriteByte(0x34);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x34);
+                            stream.Position = 19;
+                            stream.WriteByte(0x34);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x33);
+                            stream.Position = 19;
+                            stream.WriteByte(0x33);
+                        }
+                    }
+                    else
+                    {
+                        using (var stream = new FileStream(path + "\\cfg\\L_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x31);
+                            stream.Position = 19;
+                            stream.WriteByte(0x31);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x31);
+                            stream.Position = 19;
+                            stream.WriteByte(0x31);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L_normalny_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x31);
+                            stream.Position = 19;
+                            stream.WriteByte(0x31);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\L1full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x31);
+                            stream.Position = 19;
+                            stream.WriteByte(0x31);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_dzien_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x32);
+                            stream.Position = 19;
+                            stream.WriteByte(0x32);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x32);
+                            stream.Position = 19;
+                            stream.WriteByte(0x32);
+                        }
+                        using (var stream = new FileStream(path + "\\cfg\\ter02_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 5;
+                            stream.WriteByte(0x31);
+                            stream.Position = 19;
+                            stream.WriteByte(0x31);
+                        }
+                    }
+                    if (headlight_disabled == true)
+                    {
+                        using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 1335098;
+                            stream.WriteByte(0x00);
+                        }
+                    }
+                    else
+                    {
+                        using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            stream.Position = 1335098;
+                            stream.WriteByte(0x78);
+                        }
+                    }
                     using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
                     {
-                        stream.Position = 1334578;
-                        stream.WriteByte(0x63);
-                        stream.Position = 1334579;
-                        stream.WriteByte(0x75);
-                        stream.Position = 1334580;
-                        stream.WriteByte(0x73);
-                        stream.Position = 1334581;
-                        stream.WriteByte(0x74);
-                        stream.Position = 1334582;
-                        stream.WriteByte(0x6F);
-                        stream.Position = 1334583;
-                        stream.WriteByte(0x6D);
-                        stream.Position = 1334584;
-                        stream.WriteByte(0x00);
-                        stream.Position = 1334585;
-                        stream.WriteByte(0x00);
-                        stream.Position = 1334586;
-                        stream.WriteByte(0x00);
-                        stream.Position = 1334587;
-                        stream.WriteByte(0x00);
+                        stream.Position = 508444;
+                        stream.WriteByte(bytes[0]);
+                        stream.Position = 508445;
+                        stream.WriteByte(bytes[1]);
+                        stream.Position = 508446;
+                        stream.WriteByte(bytes[2]);
+                        stream.Position = 508447;
+                        stream.WriteByte(bytes[3]);
                     }
-                }
-                else
-                {
-                    using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 1334578;
-                        stream.WriteByte(0x68);
-                        stream.Position = 1334579;
-                        stream.WriteByte(0x79);
-                        stream.Position = 1334580;
-                        stream.WriteByte(0x70);
-                        stream.Position = 1334581;
-                        stream.WriteByte(0x65);
-                        stream.Position = 1334582;
-                        stream.WriteByte(0x72);
-                        stream.Position = 1334583;
-                        stream.WriteByte(0x61);
-                        stream.Position = 1334584;
-                        stream.WriteByte(0x76);
-                        stream.Position = 1334585;
-                        stream.WriteByte(0x65);
-                        stream.Position = 1334586;
-                        stream.WriteByte(0x72);
-                        stream.Position = 1334587;
-                        stream.WriteByte(0x73);
-                    }
-                }
-                if (better_distance == true)
-                {
-                    using (var stream = new FileStream(path + "\\cfg\\L_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x33);
-                        stream.Position = 19;
-                        stream.WriteByte(0x33);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x33);
-                        stream.Position = 19;
-                        stream.WriteByte(0x33);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L_normalny_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x33);
-                        stream.Position = 19;
-                        stream.WriteByte(0x33);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L1full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x33);
-                        stream.Position = 19;
-                        stream.WriteByte(0x33);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_dzien_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x34);
-                        stream.Position = 19;
-                        stream.WriteByte(0x34);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x34);
-                        stream.Position = 19;
-                        stream.WriteByte(0x34);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x33);
-                        stream.Position = 19;
-                        stream.WriteByte(0x33);
-                    }
-                }
-                else
-                {
-                    using (var stream = new FileStream(path + "\\cfg\\L_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x31);
-                        stream.Position = 19;
-                        stream.WriteByte(0x31);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x31);
-                        stream.Position = 19;
-                        stream.WriteByte(0x31);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L_normalny_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x31);
-                        stream.Position = 19;
-                        stream.WriteByte(0x31);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\L1full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x31);
-                        stream.Position = 19;
-                        stream.WriteByte(0x31);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_dzien_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x32);
-                        stream.Position = 19;
-                        stream.WriteByte(0x32);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x32);
-                        stream.Position = 19;
-                        stream.WriteByte(0x32);
-                    }
-                    using (var stream = new FileStream(path + "\\cfg\\ter02_noc_full.cfg", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 5;
-                        stream.WriteByte(0x31);
-                        stream.Position = 19;
-                        stream.WriteByte(0x31);
-                    }
-                }
-                if (headlight_disabled == true)
-                {
-                    using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 1335098;
-                        stream.WriteByte(0x00);
-                    }
-                }
-                else
-                {
-                    using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        stream.Position = 1335098;
-                        stream.WriteByte(0x78);
-                    }
-                }
-                using (var stream = new FileStream(path + "\\trucker.exe", FileMode.Open, FileAccess.ReadWrite))
-                {
-                    stream.Position = 508444;
-                    stream.WriteByte(bytes[0]);
-                    stream.Position = 508445;
-                    stream.WriteByte(bytes[1]);
-                    stream.Position = 508446;
-                    stream.WriteByte(bytes[2]);
-                    stream.Position = 508447;
-                    stream.WriteByte(bytes[3]);
                 }
                 System.Media.SystemSounds.Asterisk.Play();
                 System.Windows.Forms.MessageBox.Show("Spatchowano!", "Trucker Enchancer");
@@ -408,9 +472,11 @@ namespace Trucker_Enchancer
                 stream.Write(bytes, 0, bytes.Length);
                 Int32 kasa = (int)profilkasa.Value;
                 bytes = BitConverter.GetBytes(kasa);
-                stream.Position = 232;
+                if (trucker2 == false) stream.Position = 232;
+                if (trucker2 == true) stream.Position = 640;
                 stream.Write(bytes, 0, 4);
-                stream.Position = 236;
+                if (trucker2 == false) stream.Position = 236;
+                if (trucker2 == true) stream.Position = 644;
                 stream.WriteByte(profilevars[selectedprofile, 1]);
                 if(unlock_races == true)
                 {
