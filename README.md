@@ -1,4 +1,4 @@
-# Trucker Enchancer
+# Trucker Enhancer
 Modyfikator do gry Trucker. 
 Obecnie pozwala na:
 - Wyłączenie intra Play przy uruchomieniu
