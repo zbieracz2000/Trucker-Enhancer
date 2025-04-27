@@ -5,7 +5,9 @@ using System.ComponentModel.Design;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows.Forms;
@@ -20,6 +22,7 @@ namespace Trucker_Enhancer
 
     public partial class Form1 : Form
     {
+        bool widescreen_done;
         int numberofprofiles;
         string[] profiles;
         int selectedprofile;
@@ -38,6 +41,72 @@ namespace Trucker_Enhancer
             InitializeComponent();
         }
 
+        void Widescreen_Patch(bool apply)
+        {
+            if (apply == true)
+            {
+                System.IO.File.Create(path + "\\D3D8.dll").Close();
+                using (var stream = new FileStream(path + "\\D3D8.dll", FileMode.Open, FileAccess.Write))
+                {
+                    stream.Write(Properties.Resources.D3D8, 0, Properties.Resources.D3D8.Length);
+                }
+                System.IO.File.Create(path + "\\hook.cfg").Close();
+                using (var stream = new FileStream(path + "\\hook.cfg", FileMode.Open, FileAccess.Write))
+                {
+                    stream.Write(Properties.Resources.hook, 0, Properties.Resources.hook.Length);
+                }
+                System.Media.SystemSounds.Asterisk.Play();
+                System.Console.WriteLine("Dodano patch");
+                System.Windows.Forms.MessageBox.Show("Widescreen fix zastosowany!", "Trucker Enhancer");
+            }
+            else
+            {
+                System.IO.File.Delete(path + "\\D3D8.dll");
+                System.IO.File.Delete(path + "\\hook.cfg");
+                System.Media.SystemSounds.Asterisk.Play();
+                System.Console.WriteLine("Usunięty patch");
+                System.Windows.Forms.MessageBox.Show("Patch cofnięty!", "Trucker Enhancer");
+            }
+
+        }
+        void Update_Widescreen()
+        {
+            resolutionlist.Items.Clear();
+            resolutionlist.Items.Insert(0, "1280x720");
+            resolutionlist.Items.Insert(1, "1366x768");
+            resolutionlist.Items.Insert(2, "1600x900");
+            resolutionlist.Items.Insert(3, "1920x1080");
+
+
+            if (trucker2 == false)
+            {
+                if (System.IO.File.Exists(path + "\\D3D8.dll") == true) widescreen_done = true;
+                else widescreen_done = false;
+                widescreenbutton.Enabled = true;
+                if (widescreen_done == true)
+                {
+                    widescreenbutton.Text = "Usuń";
+                    widescreenlabel.Text = "Patch już zastosowany";
+                    resbutton.Enabled = true;
+                    resolutionlist.Enabled = true;
+                }
+                else
+                {
+                    widescreenbutton.Text = "Patchuj";
+                    widescreenlabel.Text = "Brak patcha szerokoekranowego";
+                    resbutton.Enabled = false;
+                    resolutionlist.Enabled = false;
+                }
+            }
+            else
+            {
+                widescreenbutton.Enabled = false;
+                widescreenbutton.Text = "Patchuj";
+                widescreenlabel.Text = "Niedostępny dla Trucker 2";
+                resbutton.Enabled = false;
+                resolutionlist.Enabled = false;
+            }
+        }
         void Load_profiles()
         {
             listaprofili.Items.Clear();
@@ -121,6 +190,7 @@ namespace Trucker_Enhancer
                     if (System.IO.File.Exists(path + "\\trucker.exe") == true) //detekcja truckera 1
                     {
                         Console.WriteLine("Wykryto Trukcera 1");
+                        tabPage3.Visible = true;
                         trucker2 = false;
                         money.Enabled = true;
                         checkBox2.Enabled = true;
@@ -129,12 +199,14 @@ namespace Trucker_Enhancer
                         checkBox5.Enabled = true;
                         label1.Text = path;
                         Load_profiles();
+                        Update_Widescreen();
                     }
                     else if (System.IO.File.Exists(path + "\\trucker2.exe") == true) //detekcja truckera 2, dwójka jest kompletnie niegrywalna, ale jak już mi się nudzi to dodam
                     {
                         Console.WriteLine("Wykryto Trukcera 2");
                         System.Media.SystemSounds.Asterisk.Play();
                         System.Windows.Forms.MessageBox.Show("Wykryty Trucker 2, liczba opcji ograniczona!", "Trucker Enhancer");
+                        tabPage3.Visible = false;
                         money.Enabled = false;
                         checkBox2.Enabled = false;
                         checkBox3.Enabled = false;
@@ -143,6 +215,7 @@ namespace Trucker_Enhancer
                         trucker2 = true;
                         label1.Text = path;
                         Load_profiles();
+                        Update_Widescreen();
                     }
                     else
                     {
@@ -506,6 +579,80 @@ namespace Trucker_Enhancer
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
             unlock_races = checkBox5.Checked;
+        }
+
+        private void widescreenbutton_Click(object sender, EventArgs e)
+        {
+            if (widescreen_done == false) Widescreen_Patch(true);
+            if (widescreen_done == true) Widescreen_Patch(false);
+            Update_Widescreen();
+        }
+
+        private void resbutton_Click(object sender, EventArgs e)
+        {
+            using (var stream = new FileStream(path + "\\hook.cfg", FileMode.Open, FileAccess.Write))
+            {
+                if (resolutionlist.SelectedIndex == 0)
+                {
+                    stream.Position = 16;
+                    stream.WriteByte(0x31);
+                    stream.WriteByte(0x32);
+                    stream.WriteByte(0x38);
+                    stream.WriteByte(0x30);
+                    stream.Position = 29;
+                    stream.WriteByte(0x37);
+                    stream.WriteByte(0x32);
+                    stream.WriteByte(0x30);
+                    stream.WriteByte(0x00);
+                }
+                if (resolutionlist.SelectedIndex == 1)
+                {
+                    stream.Position = 16;
+                    stream.WriteByte(0x31);
+                    stream.WriteByte(0x33);
+                    stream.WriteByte(0x36);
+                    stream.WriteByte(0x36);
+                    stream.Position = 29;
+                    stream.WriteByte(0x37);
+                    stream.WriteByte(0x36);
+                    stream.WriteByte(0x38);
+                    stream.WriteByte(0x00);
+                }
+                if (resolutionlist.SelectedIndex == 2)
+                {
+                    stream.Position = 16;
+                    stream.WriteByte(0x31);
+                    stream.WriteByte(0x36);
+                    stream.WriteByte(0x30);
+                    stream.WriteByte(0x30);
+                    stream.Position = 29;
+                    stream.WriteByte(0x39);
+                    stream.WriteByte(0x30);
+                    stream.WriteByte(0x30);
+                    stream.WriteByte(0x00);
+                }
+                if (resolutionlist.SelectedIndex == 3)
+                {
+                    stream.Position = 16;
+                    stream.WriteByte(0x31);
+                    stream.WriteByte(0x39);
+                    stream.WriteByte(0x32);
+                    stream.WriteByte(0x30);
+                    stream.Position = 29;
+                    stream.WriteByte(0x31);
+                    stream.WriteByte(0x30);
+                    stream.WriteByte(0x38);
+                    stream.WriteByte(0x30);
+                }
+            }
+            System.Media.SystemSounds.Asterisk.Play();
+            System.Console.WriteLine("Zapisano");
+            System.Windows.Forms.MessageBox.Show("Zapisano!", "Trucker Enhancer");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/izawartka/trucker-hook");
         }
     }
 }

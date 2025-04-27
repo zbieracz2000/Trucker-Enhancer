@@ -53,12 +53,21 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.listaprofili = new System.Windows.Forms.ListBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.resbutton = new System.Windows.Forms.Button();
+            this.resolutionlist = new System.Windows.Forms.ListBox();
+            this.widescreenlabel = new System.Windows.Forms.Label();
+            this.widescreenbutton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.money)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilkasa)).BeginInit();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,6 +149,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -249,11 +259,66 @@
             this.listaprofili.Name = "listaprofili";
             this.listaprofili.SelectedIndexChanged += new System.EventHandler(this.listaprofili_SelectedIndexChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.linkLabel1);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.resbutton);
+            this.tabPage3.Controls.Add(this.resolutionlist);
+            this.tabPage3.Controls.Add(this.widescreenlabel);
+            this.tabPage3.Controls.Add(this.widescreenbutton);
+            resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // resbutton
+            // 
+            resources.ApplyResources(this.resbutton, "resbutton");
+            this.resbutton.Name = "resbutton";
+            this.resbutton.UseVisualStyleBackColor = true;
+            this.resbutton.Click += new System.EventHandler(this.resbutton_Click);
+            // 
+            // resolutionlist
+            // 
+            resources.ApplyResources(this.resolutionlist, "resolutionlist");
+            this.resolutionlist.FormattingEnabled = true;
+            this.resolutionlist.Name = "resolutionlist";
+            // 
+            // widescreenlabel
+            // 
+            resources.ApplyResources(this.widescreenlabel, "widescreenlabel");
+            this.widescreenlabel.Name = "widescreenlabel";
+            // 
+            // widescreenbutton
+            // 
+            resources.ApplyResources(this.widescreenbutton, "widescreenbutton");
+            this.widescreenbutton.Name = "widescreenbutton";
+            this.widescreenbutton.UseVisualStyleBackColor = true;
+            this.widescreenbutton.Click += new System.EventHandler(this.widescreenbutton_Click);
+            // 
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
             // 
             // Form1
             // 
@@ -275,6 +340,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilkasa)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -308,6 +375,14 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button resbutton;
+        private System.Windows.Forms.ListBox resolutionlist;
+        private System.Windows.Forms.Label widescreenlabel;
+        private System.Windows.Forms.Button widescreenbutton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -61,6 +61,26 @@ namespace Trucker_Enhancer.Properties {
         }
         
         /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] D3D8 {
+            get {
+                object obj = ResourceManager.GetObject("D3D8", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] hook {
+            get {
+                object obj = ResourceManager.GetObject("hook", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap konsola {
