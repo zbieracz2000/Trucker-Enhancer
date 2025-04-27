@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Trucker_Enchancer
+namespace Trucker_Enhancer
 {
     internal static class Program
     {

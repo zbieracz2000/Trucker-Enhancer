@@ -9,11 +9,12 @@ using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using static System.Net.WebRequestMethods;
 
 
 
-namespace Trucker_Enchancer
+namespace Trucker_Enhancer
 {
 
 
@@ -37,13 +38,55 @@ namespace Trucker_Enchancer
             InitializeComponent();
         }
 
+        void Load_profiles()
+        {
+            listaprofili.Items.Clear();
+            string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
+            numberofprofiles = files.Length;
+            Console.WriteLine("{0} profili.", numberofprofiles);
+            profiles = files;
+            int index;
+            index = 0;
+            foreach (string file in files)
+            {
+                FileInfo f = new FileInfo(file);
+                profile[index, 0] = f.Name;
+                using (var stream = new FileStream(path + "\\save\\" + f.Name, FileMode.Open, FileAccess.Read))
+                {
+                    string name = "";
+                    byte[] buffer = new byte[28];
+                    stream.Position = 5;
+                    stream.Read(buffer, 0, 20);
+                    name = System.Text.Encoding.UTF8.GetString(buffer, 0, 20);
+                    profile[index, 1] = name;
+                    if (trucker2 == false) stream.Position = 232;
+                    else stream.Position = 640;
+                    stream.Read(buffer, 0, 4);
+                    kasaprofilu[index] = BitConverter.ToInt32(buffer, 0);
+                    if (trucker2 == false) stream.Position = 236;
+                    else stream.Position = 644;
+                    stream.Read(buffer, 0, 1);
+                    profilevars[index, 1] = buffer[0];
+                    if (trucker2 == false)
+                    {
+                        stream.Position = 128;
+                        stream.Read(buffer, 0, 1);
+                        profilevars[index, 2] = buffer[0];
+                    }
+                }
+                listaprofili.Items.Insert(index, profile[index, 1]);
+                index++;
+                Console.WriteLine(files);
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Process[] pname = Process.GetProcessesByName("trucker");
             if (pname.Length != 0)
             {
                 System.Media.SystemSounds.Hand.Play();
-                MessageBox.Show("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!", "Trucker Enchancer");
+                MessageBox.Show("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!", "Trucker Enhancer");
                 System.Console.WriteLine("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!");
                 Application.Exit();
             }
@@ -57,7 +100,7 @@ namespace Trucker_Enchancer
             if (profilevars[selectedprofile, 1] == 0x00) radioButton1.PerformClick();
             if (profilevars[selectedprofile, 1] == 0x01) radioButton2.PerformClick();
             if (profilevars[selectedprofile, 1] == 0x02) radioButton3.PerformClick();
-            if (profilevars[selectedprofile, 2] == 0x00) checkBox5.Enabled = true;
+            if (profilevars[selectedprofile, 2] == 0x00 & trucker2 == false) checkBox5.Enabled = true;
             else
             {
                 checkBox5.Enabled = false;
@@ -68,7 +111,6 @@ namespace Trucker_Enchancer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listaprofili.Items.Clear();
             using (var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();
@@ -80,91 +122,32 @@ namespace Trucker_Enchancer
                     {
                         Console.WriteLine("Wykryto Trukcera 1");
                         trucker2 = false;
-                        label1.Text = path;
-                        string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
-                        numberofprofiles = files.Length;
-                        Console.WriteLine("{0} profili.", numberofprofiles);
-                        profiles = files;
-                        int index;
-                        index = 0;
                         money.Enabled = true;
                         checkBox2.Enabled = true;
                         checkBox3.Enabled = true;
                         checkBox4.Enabled = true;
                         checkBox5.Enabled = true;
-                        foreach (string file in files)
-                        {
-                            FileInfo f = new FileInfo(file);
-                            profile[index, 0] = f.Name;
-                            using (var stream = new FileStream(path + "\\save\\" + f.Name, FileMode.Open, FileAccess.Read))
-                            {
-                                string name = "";
-                                byte[] buffer = new byte[28];
-                                stream.Position = 5;
-                                stream.Read(buffer, 0, 20);
-                                name = System.Text.Encoding.UTF8.GetString(buffer, 0, 20);
-                                profile[index, 1] = name;
-                                stream.Position = 232;
-                                stream.Read(buffer, 0, 4);
-                                kasaprofilu[index] = BitConverter.ToInt32(buffer, 0);
-                                stream.Position = 236;
-                                stream.Read(buffer, 0, 1);
-                                profilevars[index, 1] = buffer[0];
-                                stream.Position = 128;
-                                stream.Read(buffer, 0, 1);
-                                profilevars[index, 2] = buffer[0];
-                            }
-                            listaprofili.Items.Insert(index, profile[index, 1]);
-                            index++;
-                            Console.WriteLine(files);
-                        }
+                        label1.Text = path;
+                        Load_profiles();
                     }
                     else if (System.IO.File.Exists(path + "\\trucker2.exe") == true) //detekcja truckera 2, dwójka jest kompletnie niegrywalna, ale jak już mi się nudzi to dodam
                     {
                         Console.WriteLine("Wykryto Trukcera 2");
-                        trucker2 = true;
-                        label1.Text = path;
-                        string[] files = Directory.GetFiles(path + "\\save", "*.prf", SearchOption.TopDirectoryOnly);
-                        numberofprofiles = files.Length;
-                        Console.WriteLine("{0} profili.", numberofprofiles);
-                        profiles = files;
-                        int index;
-                        index = 0;
                         System.Media.SystemSounds.Asterisk.Play();
-                        System.Windows.Forms.MessageBox.Show("Wykryty Trucker 2, liczba opcji ograniczona!", "Trucker Enchancer");
+                        System.Windows.Forms.MessageBox.Show("Wykryty Trucker 2, liczba opcji ograniczona!", "Trucker Enhancer");
                         money.Enabled = false;
                         checkBox2.Enabled = false;
                         checkBox3.Enabled = false;
                         checkBox4.Enabled = false;
                         checkBox5.Enabled = false;
-                        foreach (string file in files)
-                        {
-                            FileInfo f = new FileInfo(file);
-                            profile[index, 0] = f.Name;
-                            using (var stream = new FileStream(path + "\\save\\" + f.Name, FileMode.Open, FileAccess.Read))
-                            {
-                                string name = "";
-                                byte[] buffer = new byte[28];
-                                stream.Position = 5;
-                                stream.Read(buffer, 0, 20);
-                                name = System.Text.Encoding.UTF8.GetString(buffer, 0, 20);
-                                profile[index, 1] = name;
-                                stream.Position = 640;
-                                stream.Read(buffer, 0, 4);
-                                kasaprofilu[index] = BitConverter.ToInt32(buffer, 0);
-                                stream.Position = 644;
-                                stream.Read(buffer, 0, 1);
-                                profilevars[index, 1] = buffer[0];
-                            }
-                            listaprofili.Items.Insert(index, profile[index, 1]);
-                            index++;
-                            Console.WriteLine(files);
-                        }
+                        trucker2 = true;
+                        label1.Text = path;
+                        Load_profiles();
                     }
                     else
                     {
                         System.Media.SystemSounds.Hand.Play();
-                        System.Windows.Forms.MessageBox.Show("Nie znaleziono gry w tym folderze!", "Trucker Enchancer");
+                        System.Windows.Forms.MessageBox.Show("Nie znaleziono gry w tym folderze!", "Trucker Enhancer");
                         System.Console.WriteLine("Zły folder");
                         path = null;
                     }
@@ -177,7 +160,7 @@ namespace Trucker_Enchancer
             if (path == null)
             {
                 System.Media.SystemSounds.Hand.Play();
-                System.Windows.Forms.MessageBox.Show("Ustaw ścieżkę do folderu z grą!", "Trucker Enchancer");
+                System.Windows.Forms.MessageBox.Show("Ustaw ścieżkę do folderu z grą!", "Trucker Enhancer");
                 System.Console.WriteLine("Nie ustawiono ścieżki");
             }
             else 
@@ -430,7 +413,7 @@ namespace Trucker_Enchancer
                     }
                 }
                 System.Media.SystemSounds.Asterisk.Play();
-                System.Windows.Forms.MessageBox.Show("Spatchowano!", "Trucker Enchancer");
+                System.Windows.Forms.MessageBox.Show("Spatchowano!", "Trucker Enhancer");
             }
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -470,6 +453,16 @@ namespace Trucker_Enchancer
                 byte[] bytes = Encoding.ASCII.GetBytes(nazwaprofilutextbox.Text);
                 stream.Position = 5;
                 stream.Write(bytes, 0, bytes.Length);
+                //sprawdzanie czy wpisana nazwa jest krótsza niż 20 znaków, jeśli tak, dodajemy puste znaki na końcu
+                if (bytes.Length != 20)
+                {
+                    stream.Position = 5 + bytes.Length;
+                    while (stream.Position <= 25)
+                    {   
+                        stream.WriteByte(0x00);
+                        stream.Position++;
+                    }
+                }
                 Int32 kasa = (int)profilkasa.Value;
                 bytes = BitConverter.GetBytes(kasa);
                 if (trucker2 == false) stream.Position = 232;
@@ -489,10 +482,11 @@ namespace Trucker_Enchancer
                         stream.Position++;
                     }
                 }
-                System.Media.SystemSounds.Asterisk.Play();
-                System.Console.WriteLine("Zapisano");
-                System.Windows.Forms.MessageBox.Show("Zapisano!", "Trucker Enchancer");
             }
+            System.Media.SystemSounds.Asterisk.Play();
+            System.Console.WriteLine("Zapisano");
+            System.Windows.Forms.MessageBox.Show("Zapisano!", "Trucker Enhancer");
+            Load_profiles();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

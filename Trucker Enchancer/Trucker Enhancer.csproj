@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{143F22EB-A80E-4F19-A8D2-686C465780A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Trucker_Enchancer</RootNamespace>
-    <AssemblyName>Trucker Enchancer</AssemblyName>
+    <RootNamespace>Trucker_Enhancer</RootNamespace>
+    <AssemblyName>Trucker Enhancer</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
