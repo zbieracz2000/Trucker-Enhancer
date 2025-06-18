@@ -1,0 +1,512 @@
+// LABELS AND COMMENTS =ENGLISH
+// IMPORTANT again - please do not translate comments - if you feel you need to, =
+// please leave original comment and insert your own translated version in next line. =
+
+
+>GameName = Trucker
+
+>NoMode =Nie mo¿na zainicjowaæ trybu!
+>LDemo = Demo for publishers only. Do not distribute.
+
+>MYes    =Tak
+>MNo     =Nie
+>MBrak   =Brak
+>MBack   =Wróæ
+>MStart  =Start gry!
+>MEmpty  =Pusty
+>MBack0  =Wróæ (brak samochodu!)
+>MCancel =Anuluj
+>MOK     =OK
+>MBest   =Najlepszy czas:
+
+>MJazda =Start!
+
+
+//
+//misje
+//
+
+// opisy misji
+// Format: >MAXY, gdzie
+// X=numer trasy misji (w kolejnosci X odpowiada trasie 1, 5, 7, 8, 14, 16, 19, 23)
+// Y=numer samochodu (w kolejnosci star, jelcz, kamaz, kenworth, peterbild
+// pozwala to zdefiniowanie innych tekstow dla kazdego samochodu na kazdej misji
+
+
+>MAD  =Cel misji:
+>MA00 =DowieŸ szybko teœciow¹ do miêsnego.
+>MA01 =Pomknij po zaopatrzenie na balangê.
+>MA02 =Potrzeba piachu na budowie.
+>MA03 =ZawieŸ ¿onê szefa do kosmetyczki.
+>MA04 =Musisz zd¹¿yæ odebraæ cement.
+>MA10 =Wygraj wyœcig o puchar z³omowiska.
+>MA11 =JedŸ po browar dla ca³ej za³ogi.
+>MA12 =¯ona musi zd¹¿yæ na ploty, dowieŸ j¹.
+>MA13 =Twoja szansa - wyœcig pod okno Heñki!
+>MA14 =PrzywieŸ wa³ówê na grilla.
+>MA20 =Podrzuæ kolegê do jego narzeczonej.
+>MA21 =ZawieŸ œmieci na wysypisko.
+>MA22 =Kolegom potrzebny jest samochód.
+>MA23 =DowieŸ paliwo na stacjê benzynow¹.
+>MA24 =OdwieŸ kole¿ankê na porodówkê.
+>MA30 =Szef ma pe³ne szambo. Za³atw to.
+>MA31 =Czeka na ciebie góra œmieci. W drogê!
+>MA32 =ZawieŸ ziemniaki do skupu.
+>MA33 =Masz ca³¹ beczkê piwa. Ludzie czekaj¹!
+>MA34 =Skoñczy³ siê cement na budowie stacji.
+>MA40 =Koledzy potrzebuj¹ mineralnej. Gazu!
+>MA41 =Ktoœ zgubi³ kratê piwa. Zdob¹dŸ j¹!
+>MA42 =Musisz przewieŸæ 10 ton piachu. W drogê!
+>MA43 =So³tys potrzebuje pomocy na blokadzie!
+>MA44 =Budowa mleczarni stoi w miejscu. Ruszaj!
+>MA50 =WywieŸ szambo pod okno wrednego s¹siada!
+>MA51 =Do weterynarza! Twoje krowy siê wœciek³y!
+>MA52 =Znajomy potrzebuje kluczy. Podrzuæ mu!
+>MA53 =Wieziesz winko, a klienci usychaj¹!
+>MA54 =Zabrak³o cementu przy budowie sklepu.
+>MA60 =Klienci czekaj¹. Gazu!
+>MA61 =OdwieŸ butelki na skup, bêdzie kasa!
+>MA62 =Lece po towar, szef goni!
+>MA63 =Gazu! Ciep³ej wódki nikt nie kupi.
+>MA64 =Na budowie skoñczy³ siê cement. Ruszaj!
+>MA70 =W koœciele zabrak³o wina na msze!
+>MA71 =ZawieŸ na spotkanie krawat Andrzejowi.
+>MA72 =Góra ³ajna do wywiezienia. Zasuwaj.
+>MA73 =Szybko, dziœ w remizie koncert country.
+>MA74 =DowieŸ cement na budowê remizy.
+
+
+//
+// muza
+//
+
+
+>MS1    =BasseBeats
+>MS1T3N =Lonely
+>MS1T3A =BasseBeats
+>MS1T4N =To Be 3
+>MS1T4A =BasseBeats
+
+>MS2    =East Clubbers
+>MS2T10N =Beat is Coming
+>MS2T10A =East Clubbers
+>MS2T4N =Walk Alone (sebastiam Sand ultra trance mx)
+>MS2T4A =East Clubbers
+>MS2T5N =It's Dream
+>MS2T5A =East Clubbers
+>MS2T6N =Bungee
+>MS2T6A =East Clubbers
+>MS2T8N =Silence
+>MS2T8A =East Clubbers
+
+>MS3    =eXtatic
+>MS3T02N =Robotronic
+>MS3T02A =eXtatic
+>MS3T03N =Break (Power On!)
+>MS3T03A =eXtatic
+>MS3T10N =Free your style
+>MS3T10A =eXtatic
+>MS3T12N =Chineese electro part 3
+>MS3T12A =eXtatic
+>MS3T13N =Play This Music
+>MS3T13A =eXtatic
+>MS3T17N =Rock da place
+>MS3T17A =eXtatic
+
+>MS4     =HYPERAVERS
+>MS4T1N  =Racing
+>MS4T1A  =HYPERAVERS
+>MS4T2N  =Rain
+>MS4T2A  =HYPERAVERS
+>MS4T3N  =snow
+>MS4T3A  =HYPERAVERS
+>MS4T5N  =Inferno
+>MS4T5A  =HYPERAVERS
+>MS4T6N  =Rack the beat
+>MS4T6A  =HYPERAVERS
+
+
+//
+// Tuning
+//
+
+>T00 =Silnik:
+>T01 =Podstawowy
+>T02 =Rasowany
+>T03 =Wyczynowy
+>T04 =Skrzynia:
+>T05 =Zawieszenie:
+>T06 =Miêkkie
+>T07 =Twarde
+>T08 =P³ug œnie¿ny:
+>T09 =Podtlenek azotu:
+>T10 =Wykrywacz radaru:
+>T11 =Ciemne szyby:
+>T12 =Neon:
+>T13 =Paliwo:
+>T14 =Uszkodzenia:
+>T15 =Przód
+>T16 =Ty³
+>T17 =Lewo
+>T18 =Prawo
+>T19 =Wybierz nowy silnik:
+>T20 =Wybierz now¹ skrzyniê:
+>T21 =Wyrzuæ.
+>T22 =Kup
+>T23 =Przywróæ standardowe
+>T24 =Zatankuj
+>T25 =Uszkodzenia przodu:
+>T26 =Uszkodzenia ty³u:
+>T27 =Uszkodzenia lewo:
+>T28 =Uszkodzenia prawo:
+>T29 =Napraw
+>T30 =Jesteœ na obszarze stacji!
+>T31 =Wciœnij ENTER ¿eby zatankowaæ.
+>T32 =Gara¿ niedostêpny podczas wyœcigu!
+>T33 =Malowanie:
+>T34 =Standard
+>T35 =Typ 1
+>T36 =Typ 2
+>T37 =Typ 3
+>T38 =Typ 4
+>T39 =Typ 5
+>T40 =Zmieñ malowanie:
+>T41 =Zu¿ycie opon:
+>T42 =Lewy przód
+>T43 =Prawy przód
+>T44 =Prawy ty³
+>T45 =Lewy ty³
+
+>T46 =Zu¿ycie opony lewy przód
+>T47 =Zu¿ycie opony prawy przód
+>T48 =Zu¿ycie opony prawy ty³
+>T49 =Zu¿ycie opony lewy ty³
+
+>T50 =Pogoda: sucho
+>T51 =Pogoda: deszcz
+
+
+>SK0 =Standardowa
+>SK1 =Profesjonalna
+>SK2 =Wyczynowa
+>SK3 =Standardowa (automatyczna)
+>SK4 =Profesjonalna (automatyczna)
+>SK5 =Wyczynowa (automatyczna)
+
+
+//
+// nazwy samochodow
+//
+
+>S0 =Stark
+>S1 =Jorcz
+>S2 =Kama5
+>S3 =Ken-ward
+>S4 =Petergreed
+
+
+>G00 =Twoje samochody:
+>G01 =Kup nowy samochód.
+>G02 =(Gara¿ pusty)
+>G03 =Poprzedni
+>G04 =Nastêpny
+>G05 =Kup!
+>G06 =Samochód: 
+>G07 =Tak, na pewno!
+
+>G08 =Wybierz trasê:
+
+>G09 =Cena:
+
+>G10 =Rodzaj wyœcigu:
+
+>G11 =Misja
+>G12 =DojedŸ do celu w jak
+>G13 =najkrótszym czasie.
+
+>G14 =Wyœcig z przeciwnikami.
+>G15 =PrzejedŸ ca³¹ trasê
+>G16 =i wyprzedŸ innych!
+
+>G17 =Okr¹¿enia.
+>G18 =Œcigaj siê z innymi
+>G19 =na zamkniêtym torze.
+
+>G20 =Czas poœcigu
+>G21 =Dystans policji
+>G22 =m.
+
+>G24 =Zosta³eœ schwytany!
+>G25 =Dosta³eœ 500 z³ mandatu i karê
+>G26 =10 sekund straty.
+>G27 =Pozosta³o czasu:
+>G28 =sekund.
+
+>G29 =Czas na z³oty medal:
+>G30 =Wpisowe:
+>G31 =Nie staæ Ciê na start!
+>G32 =G³ówna nagroda:
+
+>G33 =Trasa jeszcze niedostêpna.
+
+>G34 =Gratulacje, niez³y czas:
+>G35 =Otrzymujesz br¹zowy medal
+>G36 =oraz nagrodê:
+>G37 =Wciœnij ESC by przejœæ do menu
+>G38 =i kontynuowaæ turniej.
+
+>G39 =Gratulacje, dobry czas:
+>G40 =Otrzymujesz srebrny medal
+>G41 =oraz nagrodê:
+
+>G42 =Gratulacje, œwietny czas:
+>G43 =Otrzymujesz z³oty medal
+>G44 =oraz nagrodê:
+
+>G45 =Niestety, nie uda³o siê.
+>G46 =Nastêpnym razem postaraj siê lepiej.
+>G47 =Pamiêtaj - trening czyni mistrza!
+
+>G48 =Koniec paliwa!
+>G49 =Musisz uzupe³niaæ paliwo
+>G50 =na stacjach lub w gara¿u.
+
+>G51 =Awaria!
+>G52 =Musisz naprawiaæ samochód
+>G53 =na stacjach lub w gara¿u.
+
+>G54 =(w treningu nie ma nagród).
+
+>G55 =Ukoñczy³eœ ca³y turniej,
+>G56 =Jesteœ najlepszym kierowc¹!
+
+//
+// klawiszologia
+//
+
+>K01  =Gaz:
+>K02  =Strza³ka w góre
+>K03  =Hamulec:
+>K04  =Strza³ka w dó³
+>K05  =Wy¿szy bieg:
+>K06  =A
+>K07  =Ni¿szy bieg:
+>K08  =Z
+>K09  =Kierownica w lewo:
+>K10  =Strza³ka w lewo
+>K11  =Kierownica w prawo:
+>K12  =Strza³ka w prawo
+>K13  =Zmiana kamery:
+>K14  =C
+>K15  =Œwiat³a:
+>K16  =L
+>K17  =Podtlenek azotu:
+>K18  =N
+>K19  =Wróæ na drogê:
+>K20  =R
+>K21  =Klakson:
+>K22  =H
+>K23  =Mapa:
+>K24  =F5
+>K25  =Lusterko wsteczne:
+>K26  =F6
+>K27  =Wycieraczki:
+>K28  =W
+>K29  =Szybsza konfiguracja:
+>K30  =Page Down
+>K31  =£adniejsza konfiguracja:
+>K32  =Page Up
+
+
+
+
+
+
+
+
+// =
+// menu definitions =
+// =
+
+// key & mouse buttons definitions =
+
+//KEEP SHORT =
+
+>CMDA =A 
+>CMDB =B
+>CMDC =C
+>CMDD =D
+>CMDE =E
+>CMDF =F
+>CMDG =G
+>CMDH =H
+>CMDI =I
+>CMDJ =J
+>CMDK =K
+>CMDL =L
+>CMDM =M
+>CMDN =N
+>CMDO =O
+>CMDP =P
+>CMDQ =Q
+>CMDR =R
+>CMDS =S
+>CMDT =T
+>CMDU =U
+>CMDV =V
+>CMDW =W
+>CMDX =X
+>CMDY =Y
+>CMDZ =Z
+>CMDLeftShift =Lewy shift
+>CMDRightShift =Prawy shift
+>CMDAlt =Alt
+>CMDSpace =Spacja
+>CMDEnter =Enter
+>CMDNum0 =Num0
+>CMDNum1 =Num1
+>CMDNum2 =Num2
+>CMDNum3 =Num3
+>CMDNum4 =Num4
+>CMDNum5 =Num5
+>CMDNum6 =Num6
+>CMDNum7 =Num7
+>CMDNum8 =Num8
+>CMDNum9 =Num9
+>CMDUpArrow =Strza³ka góra
+>CMDDownArrow Strza³ka dó³
+>CMDLeftArrow =Strza³ka lewo
+>CMDRightArrow =Strza³ka prawo
+>CMDDelete =Delete
+>CMDInsert =Insert
+>CMDEnd =End
+>CMDHome =Home
+>CMDPgDown =Page Down
+>CMDPgUp =Page Up
+>CMDNumDel =Num Del
+>CMDNumEnter =Num Enter
+>CMDNumPlus =Num Plus
+>CMDNumMinus =Num Minus
+>CMDBackSpace =Back space
+>CMDComma =Przecinek
+>CMDDot =Kropa
+>CMDSlash =/
+>CMDSemicolon =Œrednik
+>CMDApostrophe =Apostrof
+>CMDSqBracketLeft =[
+>CMDSqBracketRight =]
+>CMDBackSlash =\
+>CMDMinus =Minus
+>CMDEquals =Równoœæ
+>CMDLeftControl =Lewy ctrl
+>CMDRightControl =Prawy ctrl
+>CMDMButton0 =Mysz 1
+>CMDMButton1 =Mysz 2
+>CMDMButton2 =Mysz 3
+>CMDJButton =Przycisk
+
+
+//
+// menu
+//
+
+
+
+>M01 =Aktualna wydajnoœæ:
+>M02 =Szybkoœæ
+>M03 =Wywa¿ona
+>M04 =Jakoœæ
+
+>M05 =Wybierz profil:
+>M06 =Usuñ
+>M07 =Wybierz!
+>M08 =Nowy profil!
+
+>M09 =Kasa:
+>M10 =Wyœcigów:
+
+>M11 =Profil:
+
+>M12 =Opcje:
+>M13 =Odwróæ mysz
+>M14 =Czu³oœæ myszy:
+>M15 =Wyg³adzenie myszy:
+>M16 =Gamma:
+>M17 =Domyœlna!
+
+
+>M19 =Opcje dŸwiêku:
+>M20 =DŸwiêk
+>M21 =G³oœnoœæ dŸwiêku:
+>M22 =Muzyka
+>M23 =G³oœnoœæ muzyki:
+
+>M25 =Wydajnoœæ:
+
+>M28 =Wybierz poziom:
+>M29 =Wyjœæ z gry?
+>M30 =Wybierz trudnoœæ:
+
+
+// main menu
+
+>M31 =Menu
+>M32 =Turniej
+>M33 =Trening
+>M34 =Twój gara¿
+>M35 =DŸwiêk
+>M36 =Wyjœcie
+>M37 =Opcje
+>M38 =Wydajnoœæ
+>M39 =Autorzy
+>M40 =Sterowanie
+>M41 =Zmieñ profil
+
+>M42 =Naj³atwiejszy
+>M43 =Niedzielny kierowca
+>M44 =Mistrz kierownicy
+>M45 =Wybra³eœ nowy profil.
+>M46 =Proszê, wybierz swój poziom trudnoœci:
+
+>M47 =Album:
+
+>M48 =Przerwij jazdê!
+>M49 =Przerwaæ aktualn¹ jazdê?
+
+// =
+// launcher texts =
+// =
+
+>Lt01 =Rozdzielczoœæ:
+>Lt02 =Sterowanie:
+>Lt03 =Kibordzik
+>Lt09 =Uruchom grê!
+>Lt11 =Wyjœcie.
+
+
+
+
+
+>cr01 =Kierownik zespo³u, g³ówny programista:
+>cr02 =Andrzej Wilewski
+
+>cr03 =Kierownik artystyczny, modele, animacje:
+>cr04 =Bartlomiej Biesiekirski
+
+>cr05 =Dodatkowe programowanie:
+>cr06 =Bartlomiej Waszak
+
+>cr07 =Grafika 2D:
+>cr08 =Remigiusz Nowakowski
+
+>cr09 =Projekt poziomów, testy:
+>cr10 =Krzysztof Zarzycki
+>cr11 =Pawel Waszak
+
+>cr12 =Grafika 2D/3D, grafika poziomów:
+>cr13 =Zbigniew Nowak
+
+>cr14 =Produkcja:
+>cr15 =Pawel Kalinowski,
+>cr16 =
+

@@ -143,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\text_keys_en.txt" />
+    <None Include="Resources\text_keys_pl.txt" />
     <EmbeddedResource Include="Resources\D3D8.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

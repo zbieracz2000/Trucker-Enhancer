@@ -1,0 +1,511 @@
+// LABELS AND COMMENTS = FOREIGN
+// IMPORTANT again - please do not translate comments - if you feel you need to, =
+// please leave original comment and insert your own translated version in next line. =
+
+
+>GameName =Trucker
+
+>NoMode =Unable to initiate the mode!
+>LDemo =Demo for publishers only. Do not distribute
+
+>MYes    =Yes
+>MNo     =No
+>MBrak   =None
+>MBack   =Back
+>MStart  =Start game!
+>MEmpty  =Empty
+>MBack0  =Back (no car selected!)
+>MCancel =Cancel
+>MOK     =OK
+>MBest   =Best time:
+
+>MJazda =Start!
+
+
+//
+//misje
+//
+
+// opisy misji
+// Format: >MAXY, gdzie
+// X=numer trasy misji (w kolejnosci X odpowiada trasie 1, 5, 7, 8, 14, 16, 19, 23)
+// Y=numer samochodu (w kolejnosci star, jelcz, kamaz, kenworth, peterbild
+// pozwala to zdefiniowanie innych tekstow dla kazdego samochodu na kazdej misji
+
+
+>MAD  =Mission:
+>MA00 =Bring your mother-in-law quickly to the butcher shop.
+>MA01 =Rush for the supplies for party.
+>MA02 =We need some sand for the construction site.
+>MA03 =Take the wife of the boss to the beautician.
+>MA04 =You have to make it to receive cement.
+>MA10 =Win the race for the Cup of Scrap-heap.
+>MA11 =Go to pick up the beer for the whole crew.
+>MA12 =Your wife is in a hurry to get to gossips. Bring her.
+>MA13 =Your chance – a race to the Heñka's window.
+>MA14 =Bring the prog for the grill party.
+>MA20 =Bring your friend to his fiancee.
+>MA21 =Bring the trash to the trashyard.
+>MA22 =Your friends need the car.
+>MA23 =Bring the fuel to the gas station.
+>MA24 =Drive your „girlfriend” to the delivery hall
+>MA30 =The boss has his cesspit overfilled. Fix it.
+>MA31 =A heap of trash is waiting for you. Get moving!
+>MA32 =Bring the potatoes to the collection point.
+>MA33 =You have a full cag of beer. People are waiting!
+>MA34 =There is no more cement on the construction site.
+>MA40 =Colleagues need the mineral water. Go for it!
+>MA41 =Someone has lost a crate of beer. Get it!
+>MA42 =You have to shuttle 10 tons of sand. Make your moves!
+>MA43 =Village administrator needs some help on the blockade!
+>MA44 =The construction of creamery is on hold. Hurry!
+>MA50 =Take the cesspit under the mean neighbour's window!
+>MA51 =To the veterinarian! Your cows got mad!
+>MA52 =A friend needs some tools. Bring them to him!
+>MA53 =You're carrying a wine, and the clients are dying for it!
+>MA54 =They've run out of cement on the store construction site.
+>MA60 =The clients are waiting. Go for it!
+>MA61 =Bring the bottles to the shop and get some cash back.
+>MA62 =I better hurry for the merchandise, the boss is urging!
+>MA63 =Speed up! No-one's gonna buy warm vodka.
+>MA64 =The construction site ran out of cement. Go go go!
+>MA70 =The church has fallen short of wine for the mass!
+>MA71 =Bring the tie for Andrew's meeting.
+>MA72 =A heap of muck to dispose. Move it.
+>MA73 =Quick, there's a country concert in the barn today.
+>MA74 =Bring the cement to the school's building site.
+
+
+//
+// muza
+//
+
+
+>MS1    =BasseBeats
+>MS1T3N =Lonely
+>MS1T3A =BasseBeats
+>MS1T4N =To Be 3
+>MS1T4A =BasseBeats
+
+>MS2    =East Clubbers
+>MS2T10N =Beat is Coming
+>MS2T10A =East Clubbers
+>MS2T4N =Walk Alone (Sebastian Sand ultra trance mx)
+>MS2T4A =East Clubbers
+>MS2T5N =It's Dream
+>MS2T5A =East Clubbers
+>MS2T6N =Bungee
+>MS2T6A =East Clubbers
+>MS2T8N =Silence
+>MS2T8A =East Clubbers
+
+>MS3    =Extatic
+>MS3T02N =Robotronic
+>MS3T02A =eXtatic
+>MS3T03N =Break (Power On!)
+>MS3T03A =eXtatic
+>MS3T10N =Free your style
+>MS3T10A =eXtatic
+>MS3T12N =Chinese electro part 3
+>MS3T12A =eXtatic
+>MS3T13N =Play This Music
+>MS3T13A =eXtatic
+>MS3T17N =Rock da place
+>MS3T17A =eXtatic
+
+>MS4     =Hyperavers
+>MS4T1N  =Racing
+>MS4T1A  =Hyperavers
+>MS4T2N  =Rain
+>MS4T2A  =Hyperavers
+>MS4T3N  =Snow
+>MS4T3A  =Hyperavers
+>MS4T5N  =Inferno
+>MS4T5A  =Hyperavers
+>MS4T6N  =Rock the beat
+>MS4T6A  =Hyperavers
+
+
+//
+// Tuning
+//
+
+>T00 =Engine:
+>T01 =Basic
+>T02 =Tuned
+>T03 =Pro
+>T04 =Gearbox:
+>T05 =Suspension:
+>T06 =Soft
+>T07 =Hard
+>T08 =Snow plough:
+>T09 =Nitrous oxide:
+>T10 =Radar seeker:
+>T11 =Window tint:
+>T12 =Neon:
+>T13 =Fuel:
+>T14 =Damages:
+>T15 =Front
+>T16 =Rear
+>T17 =Left
+>T18 =Right
+>T19 =Choose new engine:
+>T20 =Choose new gear-box:
+>T21 =Drop
+>T22 =Buy
+>T23 =Restore defaults
+>T24 =Refuel
+>T25 =Damage front:
+>T26 =Damage rear:
+>T27 =Damage left:
+>T28 =Damage right:
+>T29 =Repair
+>T30 =You're entered the station!
+>T31 =Press ENTER to refuel.
+>T32 =During the race garage is unavailable!
+>T33 =Painting:
+>T34 =Standard
+>T35 =Type 1
+>T36 =Type 2
+>T37 =Type 3
+>T38 =Type 4
+>T39 =Type 5
+>T40 =Change paintjob:
+>T41 =Tire use:
+>T42 =Left front
+>T43 =Right front
+>T44 =Right rear
+>T45 =Left rear
+
+>T46 =Tire use left front
+>T47 =Tire use right front
+>T48 =Tire use right rear
+>T49 =Tire use left rear
+
+>T50 =Weather: dry
+>T51 =Weather: rain
+
+
+>SK0 =Standard
+>SK1 =Professional
+>SK2 =Stunt
+>SK3 =Standard (automatic)
+>SK4 =Professional (automatic)
+>SK5 =Stunt (automatic)
+
+
+//
+// nazwy samochodow
+//
+
+>S0 =Stark
+>S1 =Jorcz
+>S2 =Kama5
+>S3 =Ken-ward
+>S4 =Petergreed
+
+
+>G00 =Your cars:
+>G01 =Buy a new car.
+>G02 =(No car)
+>G03 =Previous
+>G04 =Next
+>G05 =Buy!
+>G06 =Car:
+>G07 =Yes, for sure!
+
+>G08 =Choose route:
+
+>G09 =Price:
+
+>G10 =Race type:
+
+>G11 =Mission - Reach the
+>G12 =destination in the
+>G13 =shortest time.
+
+>G14 =Race with opponents.
+>G15 =Drive and overtake
+>G16 =the others!
+
+>G17 =Laps
+>G18 =Race with the others
+>G19 =on a closed track.
+
+>G20 =Time of pursuit.
+>G21 =Distance of the police.
+>G22 =
+
+>G24 =You've been caught!
+>G25 =You get 500 z³ fine and a handicap
+>G26 =of 10 seconds
+>G27 =Time left:
+>G28 =seconds.
+
+>G29 =Gold medal time:
+>G30 =Fee to enter:
+>G31 =No cash for entry fee!
+>G32 =Main prize:
+
+>G33 =Not available yet.
+
+>G34 =Congratulations, nice time:
+>G35 =You've won bronze medal
+>G36 =And a prize:
+>G37 =Press ESC to switch to menu
+>G38 =and continue the tournament
+
+>G39 =Congratulations, nice time:
+>G40 =You've won silver medal
+>G41 =and a prize:
+
+>G42 =Congratulations, nice time:
+>G43 =You've won gold medal
+>G44 =and a prize:
+
+>G45 =Unfortunately, you didn't make it.
+>G46 =Next time try harder.
+>G47 =Remember – practice makes champions!
+
+>G48 =Out of fuel!
+>G49 =You have to refuel
+>G50 =on a gas station or in garage.
+
+>G51 =Damage!
+>G52 =You have to fix your car
+>G53 =on a gas station or in garage.
+
+>G54 =(there's no prizes in training mode)
+
+>G55 =You've finished the whole tournament,
+>G56 =you're the best driver!
+
+//
+// klawiszologia
+//
+
+>K01  =Accelerate:
+>K02  =Up arrow
+>K03  =Brake:
+>K04  =Down arrow
+>K05  =Gear up:
+>K06  =A
+>K07  =Gear down:
+>K08  =Z
+>K09  =Turn left:
+>K10  =Left arrow
+>K11  =Turn right:
+>K12  =Right arrow
+>K13  =Change the camera:
+>K14  =C
+>K15  =Lights:
+>K16  =L
+>K17  =Nitrous oxide:
+>K18  =N
+>K19  =Return to track:
+>K20  =R
+>K21  =Horn:
+>K22  =H
+>K23  =Map:
+>K24  =F5
+>K25  =Rear mirror:
+>K26  =F6
+>K27  =Wipers:
+>K28  =W
+>K29  =Slower computer:
+>K30  =Page Down
+>K31  =Optimum configuration:
+>K32  =Page Up
+
+
+
+
+
+
+
+
+// =
+// menu definitions =
+// =
+
+// key & mouse buttons definitions =
+
+//KEEP SHORT =
+
+>CMDA =A
+>CMDB =B
+>CMDC =C
+>CMDD =D
+>CMDE =E
+>CMDF =F
+>CMDG =G
+>CMDH =H
+>CMDI =I
+>CMDJ =J
+>CMDK =K
+>CMDL =L
+>CMDM =M
+>CMDN =N
+>CMDO =O
+>CMDP =P
+>CMDQ =Q
+>CMDR =R
+>CMDS =S
+>CMDT =T
+>CMDU =U
+>CMDV =V
+>CMDW =W
+>CMDX =X
+>CMDY =Y
+>CMDZ =Z
+>CMDLeftShift =Left shift
+>CMDRightShift =Right shift
+>CMDAlt =Alt
+>CMDSpace =Space
+>CMDEnter =Enter
+>CMDNum0 =Num0
+>CMDNum1 =Num1
+>CMDNum2 =Num2
+>CMDNum3 =Num3
+>CMDNum4 =Num4
+>CMDNum5 =Num5
+>CMDNum6 =Num6
+>CMDNum7 =Num7
+>CMDNum8 =Num8
+>CMDNum9 =Num9
+>CMDUpArrow =Up arrow
+>CMDDownArrow =Down arrow
+>CMDLeftArrow =Left Arrow
+>CMDRightArrow =Right arrow
+>CMDDelete =Delete
+>CMDInsert =Insert
+>CMDEnd =End
+>CMDHome =Home
+>CMDPgDown =Page Down
+>CMDPgUp =Page Up
+>CMDNumDel =Num Del
+>CMDNumEnter =Num Enter
+>CMDNumPlus =Num Plus
+>CMDNumMinus =Num Minus
+>CMDBackSpace =Back space
+>CMDComma =Comma
+>CMDDot =Period
+>CMDSlash =/
+>CMDSemicolon =Semicolon
+>CMDApostrophe =Apostrophe
+>CMDSqBracketLeft =[
+>CMDSqBracketRight =]
+>CMDBackSlash =\
+>CMDMinus =Minus
+>CMDEquals =Equals
+>CMDLeftControl =Left ctrl
+>CMDRightControl =Right ctrl
+>CMDMButton0 =Mouse 1
+>CMDMButton1 =Mouse 2
+>CMDMButton2 =Mouse 3
+>CMDJButton =Button
+
+
+//
+// menu
+//
+
+
+
+>M01 =Performance:
+>M02 =Speed
+>M03 =Balanced
+>M04 =Quality
+
+>M05 =Choose profile:
+>M06 =Remove
+>M07 =Choose!
+>M08 =New profile!
+
+>M09 =Cash:
+>M10 =Races:
+
+>M11 =Profile:
+
+>M12 =Options:
+>M13 =Invert mouse:
+>M14 =Mouse sensibility:
+>M15 =Mouse smoothness:
+>M16 =Gamma:
+>M17 =Default!
+
+
+>M19 =Sound options:
+>M20 =Sound:
+>M21 =Volume:
+>M22 =Music
+>M23 =Music volume:
+
+>M25 =Performance:
+
+>M28 =Choose level:
+>M29 =Exit game?
+>M30 =Choose difficulty level:
+
+
+// main menu
+
+>M31 =Menu
+>M32 =Tournament
+>M33 =Training
+>M34 =Your garage
+>M35 =Sound options:
+>M36 =Exit game?
+>M37 =Options:
+>M38 =Performance:
+>M39 =Authors
+>M40 =Controls
+>M41 =Change profile
+
+>M42 =Easiest
+>M43 =Sunday driver
+>M44 =Champion of the wheel
+>M45 =You've chosen a new profile.
+>M46 =Please, select your level of difficulty:
+
+>M47 =Album:
+
+>M48 =Stop driving!
+>M49 =Stop current drive?
+
+// =
+// launcher texts =
+// =
+
+>Lt01 =Resolution:
+>Lt02 =Controls:
+>Lt03 =Keyboard
+>Lt09 =Start the game!
+>Lt11 =Exit.
+
+
+
+
+
+>cr01 =Team Manager and Lead Programmer:
+>cr02 =Andrzej Wilewski
+
+>cr03 =Art Director, Characters & Animation:
+>cr04 =Bartlomiej Biesiekirski
+
+>cr05 =Second Programmer:
+>cr06 =Bartlomiej Waszak
+
+>cr07 =Lead 2D Artist:
+>cr08 =Remigiusz Nowakowski
+
+>cr09 =Level Design, QA:
+>cr10 =Krzysztof Zarzycki
+>cr11 =Pawel Waszak
+
+>cr12 =2D/3D Artist, level art:
+>cr13 =Zbigniew Nowak
+
+>cr14 =Producers:
+>cr15 =Pawel Kalinowski,
+>cr16 =

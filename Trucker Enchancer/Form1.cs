@@ -36,6 +36,7 @@ namespace Trucker_Enhancer
         bool headlight_disabled;
         bool unlock_races;
         bool trucker2;
+        string temp = Path.GetTempPath() + "\\tc.cfg";
         public Form1()
         {
             InitializeComponent();
@@ -159,6 +160,45 @@ namespace Trucker_Enhancer
                 System.Console.WriteLine("Gra jest obecnie uruchomiona, zamknij ją przed modowaniem!");
                 Application.Exit();
             }
+            if (System.IO.File.Exists(temp) == true) //Ładowanie ostatniej ścieżki
+            {
+                string read = System.IO.File.ReadAllText(temp);
+                if (read != null)
+                {
+                    path = read;
+                    Console.WriteLine("Ścieżka gry z ostatniej sesji");
+                    if (System.IO.File.Exists(path + "\\trucker.exe") == true) //detekcja truckera 1
+                    {
+                        Console.WriteLine("Wykryto Trukcera 1");
+                        tabPage3.Visible = true;
+                        trucker2 = false;
+                        money.Enabled = true;
+                        checkBox2.Enabled = true;
+                        checkBox3.Enabled = true;
+                        checkBox4.Enabled = true;
+                        checkBox5.Enabled = true;
+                        label1.Text = path;
+                        Load_profiles();
+                        Update_Widescreen();
+                    }
+                    else //Trucker 2
+                    {
+                        Console.WriteLine("Wykryto Trukcera 2");
+                        System.Media.SystemSounds.Asterisk.Play();
+                        System.Windows.Forms.MessageBox.Show("Wykryty Trucker 2, liczba opcji ograniczona!", "Trucker Enhancer");
+                        tabPage3.Visible = false;
+                        money.Enabled = false;
+                        checkBox2.Enabled = false;
+                        checkBox3.Enabled = false;
+                        checkBox4.Enabled = false;
+                        checkBox5.Enabled = false;
+                        trucker2 = true;
+                        label1.Text = path;
+                        Load_profiles();
+                        Update_Widescreen();
+                    }
+                }
+            }
         }
 
         private void listaprofili_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,9 +237,12 @@ namespace Trucker_Enhancer
                         checkBox3.Enabled = true;
                         checkBox4.Enabled = true;
                         checkBox5.Enabled = true;
+                        radio_en.Enabled = true;
+                        radio_pl.Enabled = true;
                         label1.Text = path;
                         Load_profiles();
                         Update_Widescreen();
+                        System.IO.File.WriteAllText(temp, path);
                     }
                     else if (System.IO.File.Exists(path + "\\trucker2.exe") == true) //detekcja truckera 2, dwójka jest kompletnie niegrywalna, ale jak już mi się nudzi to dodam
                     {
@@ -212,10 +255,13 @@ namespace Trucker_Enhancer
                         checkBox3.Enabled = false;
                         checkBox4.Enabled = false;
                         checkBox5.Enabled = false;
+                        radio_en.Enabled = false;
+                        radio_pl.Enabled = false;
                         trucker2 = true;
                         label1.Text = path;
                         Load_profiles();
                         Update_Widescreen();
+                        System.IO.File.WriteAllText(temp, path);
                     }
                     else
                     {
@@ -353,6 +399,14 @@ namespace Trucker_Enhancer
                             stream.WriteByte(0x73);
                         }
                     }
+                    if (radio_pl.Checked == true) using (var stream = new FileStream(path + "\\scripts\\text_keys.txt", FileMode.Open, FileAccess.Write))
+                        {
+                            stream.Write(Properties.Resources.text_keys_pl, 0, Properties.Resources.text_keys_pl.Length);
+                        }
+                    else if (radio_en.Checked == true) using (var stream = new FileStream(path + "\\scripts\\text_keys.txt", FileMode.Open, FileAccess.Write))
+                        {
+                            stream.Write(Properties.Resources.text_keys_en, 0, Properties.Resources.text_keys_en.Length);
+                        }
                     if (better_distance == true)
                     {
                         using (var stream = new FileStream(path + "\\cfg\\L_mgla_full.cfg", FileMode.Open, FileAccess.ReadWrite))
@@ -653,6 +707,14 @@ namespace Trucker_Enhancer
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/izawartka/trucker-hook");
+        }
+
+        private void radio_pl_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void radio_en_CheckedChanged(object sender, EventArgs e)
+        {
         }
     }
 }

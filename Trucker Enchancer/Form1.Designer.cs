@@ -54,14 +54,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listaprofili = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label7 = new System.Windows.Forms.Label();
             this.resbutton = new System.Windows.Forms.Button();
             this.resolutionlist = new System.Windows.Forms.ListBox();
             this.widescreenlabel = new System.Windows.Forms.Label();
             this.widescreenbutton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.radio_pl = new System.Windows.Forms.RadioButton();
+            this.radio_en = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.money)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -156,6 +159,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.radio_en);
+            this.tabPage1.Controls.Add(this.radio_pl);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.checkBox4);
             this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.run);
@@ -272,6 +278,23 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
             // resbutton
             // 
             resources.ApplyResources(this.resbutton, "resbutton");
@@ -303,22 +326,26 @@
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // label7
+            // label9
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
             // 
-            // linkLabel1
+            // radio_pl
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            resources.ApplyResources(this.radio_pl, "radio_pl");
+            this.radio_pl.Name = "radio_pl";
+            this.radio_pl.TabStop = true;
+            this.radio_pl.UseVisualStyleBackColor = true;
+            this.radio_pl.CheckedChanged += new System.EventHandler(this.radio_pl_CheckedChanged);
             // 
-            // label8
+            // radio_en
             // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
+            resources.ApplyResources(this.radio_en, "radio_en");
+            this.radio_en.Name = "radio_en";
+            this.radio_en.TabStop = true;
+            this.radio_en.UseVisualStyleBackColor = true;
+            this.radio_en.CheckedChanged += new System.EventHandler(this.radio_en_CheckedChanged);
             // 
             // Form1
             // 
@@ -383,6 +410,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton radio_en;
+        private System.Windows.Forms.RadioButton radio_pl;
+        private System.Windows.Forms.Label label9;
     }
 }
 

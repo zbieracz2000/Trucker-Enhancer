@@ -89,5 +89,25 @@ namespace Trucker_Enhancer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] text_keys_en {
+            get {
+                object obj = ResourceManager.GetObject("text_keys_en", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] text_keys_pl {
+            get {
+                object obj = ResourceManager.GetObject("text_keys_pl", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
